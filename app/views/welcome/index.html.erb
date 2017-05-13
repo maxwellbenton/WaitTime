@@ -1,0 +1,46 @@
+<body onpageshow="getLocation()">
+
+
+
+<img id="user_map">
+
+<p>Click the button to get your coordinates.</p>
+
+<p id="demo"></p>
+
+
+    
+
+   
+    <%if !session[:user_wait_time_id].present?%>
+        <h5>Start Timer</h5>
+        <%= form_tag user_wait_times_path, :method=>'post' do %>
+            <%= hidden_field_tag 'store', value = 'Whole Foods Market Tribeca'%>
+            <%= hidden_field_tag 'name', value = 'Maxwell'%>
+            <%= submit_tag "Time Wait"%>
+        <% end %>
+    <%else%>
+        <h5 >Stop Timer</h5>
+        <%= form_for UserWaitTime.find(session[:user_wait_time_id]) do |f|%>
+            <%= submit_tag "Stop Timer"  %>
+        <% end %>
+    <%end%>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(GeoL);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function GeoL(position) {
+  document.getElementById('user_map').src = "https://maps.googleapis.com/maps/api/staticmap?size=500x300&scale=3&markers=color:blue%7C"+position.coords.latitude+","+position.coords.longitude+"&maptype=satellite&key=AIzaSyB3F176LCpeD1f-yhcdxLpEIGQawbGQBIU"
+}
+
+
+</script>
+</body>
