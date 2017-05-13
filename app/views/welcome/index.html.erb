@@ -1,17 +1,13 @@
 <body onpageshow="getLocation()">
 
+<div class='container'>
+    <div class='row center-align'>
+        <div class='col s3'></div>
+        <div class='col s6 m6'><img id="user_map" class="responsive-img"></div>
+        <div class='col s3'></div>
+    </div>
 
-
-<img id="user_map">
-
-<p>Click the button to get your coordinates.</p>
-
-<p id="demo"></p>
-
-
-    
-
-   
+    <div class='abs center-align'>
     <%if !session[:user_wait_time_id].present?%>
         <h5>Start Timer</h5>
         <%= form_tag user_wait_times_path, :method=>'post' do %>
@@ -25,7 +21,16 @@
             <%= submit_tag "Stop Timer"  %>
         <% end %>
     <%end%>
+    </div>
 
+    <div class='row center-align'>
+        <div class='col s3'></div>
+        <div class='col s6 m6'>
+        </div>
+        <div class='col s3'></div>
+    </div>
+
+</div>
 <script>
 var x = document.getElementById("demo");
 
@@ -38,7 +43,7 @@ function getLocation() {
 }
 
 function GeoL(position) {
-  document.getElementById('user_map').src = "https://maps.googleapis.com/maps/api/staticmap?size=500x300&scale=3&markers=color:blue%7C"+position.coords.latitude+","+position.coords.longitude+"&maptype=satellite&key=AIzaSyB3F176LCpeD1f-yhcdxLpEIGQawbGQBIU"
+  document.getElementById('user_map').src = "https://maps.googleapis.com/maps/api/staticmap?size=600x500&scale=2&markers=color:blue%7C"+position.coords.latitude+","+position.coords.longitude+"&maptype=satellite&key=AIzaSyB3F176LCpeD1f-yhcdxLpEIGQawbGQBIU"
 }
 
 
